@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AL Desenvolvimento Web | Sites Profissionais para Negócios</title>
+  <meta name="description" content="Criação de sites e landing pages profissionais para pequenas e médias empresas. Responsive, rápidos e focados em resultados." />
+  <meta name="theme-color" content="#080C18" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" id="nav-logo-link">
+        <img id="site-logo-nav" src="./assets/AL Desenvolvmento Web (contrato).png" alt="AL Desenvolvimento Web" class="logo-img" />
+        <span class="logo-fallback" id="logo-fallback-nav">
+          <span class="nav-logo-al">AL</span>
+          <span class="nav-logo-text">Desenvolvimento Web</span>
+        </span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks" role="navigation">
+        <li><a href="#sobre"     class="nav-link">Sobre</a></li>
+        <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
+        <li><a href="#servicos"  class="nav-link">Serviços</a></li>
+        <li><a href="#precos"    class="nav-link">Preços</a></li>
+        <li><a href="#contato"   class="nav-cta">Fale Comigo</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <span class="badge-dot" aria-hidden="true"></span>
+        Disponível para novos projetos
+      </div>
+      <h1 class="hero-title reveal delay-1">
+        Sites que<br />
+        <span class="gradient-text">vendem de verdade</span>
+      </h1>
+      <p class="hero-sub reveal delay-2">
+        Crio sites e landing pages para pequenas e médias empresas que querem presença digital profissional, sem complicação.
+      </p>
+      <div class="hero-actions reveal delay-3">
+        <a href="#portfolio" class="btn-primary">Ver meus trabalhos</a>
+        <a href="#contato"   class="btn-outline">Solicitar orçamento</a>
+      </div>
+      <div class="hero-stats reveal delay-4">
+        <div class="stat">
+          <span class="stat-num" data-target="10">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">Projetos entregues</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="100">0</span><span class="stat-plus">%</span>
+          <span class="stat-label">Mobile first</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="3">0</span><span class="stat-plus">x</span>
+          <span class="stat-label">Mais rápido que o padrão</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal delay-2" aria-hidden="true">
+      <div class="browser-mockup">
+        <div class="browser-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <div class="browser-url">aldesenvolvimentoweb.com.br</div>
+        </div>
+        <div class="browser-content">
+          <div class="mock-hero-bar"></div>
+          <div class="mock-grid">
+            <div class="mock-card mc1"></div>
+            <div class="mock-card mc2"></div>
+            <div class="mock-card mc3"></div>
+          </div>
+          <div class="mock-text-lines">
+            <div class="mock-line ml-80"></div>
+            <div class="mock-line ml-60"></div>
+            <div class="mock-line ml-90"></div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-badge fb-1"><span class="fb-icon">✓</span> Entregue no prazo</div>
+      <div class="floating-badge fb-2"><span class="fb-icon">⚡</span> Performance 90+</div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="container">
+      <div class="sobre-inner">
+        <div class="sobre-photo-wrap reveal">
+          <div class="photo-frame">
+            <img id="about-photo" src="" alt="Antonio Luiz" class="about-photo-img" />
+            <div class="photo-placeholder" id="photo-fallback">
+              <div class="photo-initials">AL</div>
+              <p class="photo-hint">Sua foto aqui</p>
+            </div>
+          </div>
+          <div class="photo-accent" aria-hidden="true"></div>
+          <div class="tech-stack-badges" aria-label="Tecnologias utilizadas">
+            <span class="tech-badge">HTML5</span>
+            <span class="tech-badge">CSS3</span>
+            <span class="tech-badge">JavaScript</span>
+            <span class="tech-badge">WordPress</span>
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Git</span>
+          </div>
+        </div>
+        <div class="sobre-text reveal delay-1">
+          <span class="section-label">Sobre mim</span>
+          <h2 class="section-title">Antonio Luiz,<br />desenvolvedor web</h2>
+          <p class="sobre-desc" id="about-desc-1">
+            Fundei a AL Desenvolvimento Web para resolver um problema real: pequenas e médias empresas que precisam de presença digital profissional, mas encontram soluções caras ou de baixa qualidade no mercado.
+          </p>
+          <p class="sobre-desc" id="about-desc-2">
+            Trabalho com HTML, CSS, JavaScript e WordPress para entregar sites responsivos, rápidos e focados em resultados. Cada projeto recebe atenção individual, do briefing ao lançamento.
+          </p>
+          <div class="sobre-values">
+            <div class="value-item">
+              <span class="value-icon" aria-hidden="true">🎯</span>
+              <div><strong>Foco em resultado</strong><p>O site existe para gerar clientes, não para ganhar prêmio de design.</p></div>
+            </div>
+            <div class="value-item">
+              <span class="value-icon" aria-hidden="true">📱</span>
+              <div><strong>Mobile primeiro</strong><p>Mais de 70% dos usuários acessam pelo celular. Projeto pensando nisso.</p></div>
+            </div>
+            <div class="value-item">
+              <span class="value-icon" aria-hidden="true">🤝</span>
+              <div><strong>Comunicação direta</strong><p>Sem intermediários. Você fala direto com quem faz.</p></div>
+            </div>
+          </div>
+          <a href="#contato" class="btn-primary">Falar sobre seu projeto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Portfólio</span>
+        <h2 class="section-title">Trabalhos entregues</h2>
+        <p class="section-sub">Projetos reais para clientes reais.</p>
+      </div>
+      <div class="portfolio-filters reveal delay-1" id="portfolio-filters" role="group" aria-label="Filtrar projetos">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="landing">Landing Pages</button>
+        <button class="filter-btn" data-filter="institucional">Institucionais</button>
+        <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+      </div>
+      <div class="portfolio-grid" id="portfolio-grid" aria-live="polite">
+        <div class="portfolio-skeleton"></div>
+        <div class="portfolio-skeleton"></div>
+        <div class="portfolio-skeleton"></div>
+        <div class="portfolio-skeleton"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="servicos" id="servicos">
+    <div class="hero-glow sg-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Serviços</span>
+        <h2 class="section-title">O que eu entrego</h2>
+        <p class="section-sub">Cada serviço tem escopo claro, prazo definido e resultado mensurável.</p>
+      </div>
+      <div class="servicos-grid">
+        <div class="servico-card reveal">
+          <div class="sc-icon" aria-hidden="true">🚀</div>
+          <h3>Landing Page</h3>
+          <p>Página focada em conversão para campanhas, lançamentos de produto ou captação de leads.</p>
+          <ul class="sc-list">
+            <li>Design responsivo mobile first</li>
+            <li>Formulário ou botão WhatsApp</li>
+            <li>SEO básico</li>
+            <li>Entrega em até 7 dias</li>
+          </ul>
+        </div>
+        <div class="servico-card sc-featured reveal delay-1">
+          <div class="sc-badge">Mais pedido</div>
+          <div class="sc-icon" aria-hidden="true">🏢</div>
+          <h3>Site Institucional</h3>
+          <p>Site completo para apresentar seu negócio com profissionalismo. Até 5 páginas.</p>
+          <ul class="sc-list">
+            <li>Até 5 páginas</li>
+            <li>Design personalizado</li>
+            <li>Integração com Google Maps</li>
+            <li>WhatsApp flutuante</li>
+            <li>SEO on-page</li>
+            <li>Entrega em até 15 dias</li>
+          </ul>
+        </div>
+        <div class="servico-card reveal delay-2">
+          <div class="sc-icon" aria-hidden="true">🛒</div>
+          <h3>Site com WordPress</h3>
+          <p>Site em WordPress com Elementor para você editar o conteúdo sem depender de programador.</p>
+          <ul class="sc-list">
+            <li>Painel administrativo</li>
+            <li>Blog incluso</li>
+            <li>Plugins essenciais configurados</li>
+            <li>Treinamento básico para uso</li>
+            <li>Entrega em até 20 dias</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREÇOS -->
+  <section class="precos" id="precos">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Preços</span>
+        <h2 class="section-title">Investimento claro,<br />sem surpresas</h2>
+        <p class="section-sub">Preços diretos. Sem taxas escondidas.</p>
+      </div>
+      <div class="precos-grid">
+        <div class="preco-card reveal">
+          <div class="preco-header">
+            <span class="preco-plano">Starter</span>
+            <div class="preco-valor">
+              <span class="preco-moeda">R$</span>
+              <span class="preco-num" id="price-starter">1.197</span>
+            </div>
+            <span class="preco-desc">Landing Page</span>
+          </div>
+          <ul class="preco-list">
+            <li><span class="check" aria-hidden="true">✓</span> 1 página completa</li>
+            <li><span class="check" aria-hidden="true">✓</span> Design responsivo</li>
+            <li><span class="check" aria-hidden="true">✓</span> Formulário de contato</li>
+            <li><span class="check" aria-hidden="true">✓</span> Botão WhatsApp</li>
+            <li><span class="check" aria-hidden="true">✓</span> SEO básico</li>
+            <li><span class="check" aria-hidden="true">✓</span> Entrega em 7 dias</li>
+            <li><span class="check" aria-hidden="true">✓</span> 1 revisão inclusa</li>
+          </ul>
+          <a href="#contato" class="btn-outline preco-cta">Quero este plano</a>
+        </div>
+
+        <div class="preco-card pc-featured reveal delay-1">
+          <div class="pc-popular">Recomendado</div>
+          <div class="preco-header">
+            <span class="preco-plano">Profissional</span>
+            <div class="preco-valor">
+              <span class="preco-moeda">R$</span>
+              <span class="preco-num" id="price-pro">1.597</span>
+            </div>
+            <span class="preco-desc">Site Institucional</span>
+          </div>
+          <ul class="preco-list">
+            <li><span class="check" aria-hidden="true">✓</span> Até 5 páginas</li>
+            <li><span class="check" aria-hidden="true">✓</span> Design personalizado</li>
+            <li><span class="check" aria-hidden="true">✓</span> Google Maps integrado</li>
+            <li><span class="check" aria-hidden="true">✓</span> WhatsApp flutuante</li>
+            <li><span class="check" aria-hidden="true">✓</span> SEO on-page completo</li>
+            <li><span class="check" aria-hidden="true">✓</span> Entrega em 15 dias</li>
+            <li><span class="check" aria-hidden="true">✓</span> 3 revisões inclusas</li>
+            <li><span class="check" aria-hidden="true">✓</span> Suporte por 30 dias</li>
+          </ul>
+          <a href="#contato" class="btn-primary preco-cta">Quero este plano</a>
+        </div>
+
+        <div class="preco-card reveal delay-2">
+          <div class="preco-header">
+            <span class="preco-plano">Business</span>
+            <div class="preco-valor">
+              <span class="preco-moeda">R$</span>
+              <span class="preco-num" id="price-business">1.997</span>
+            </div>
+            <span class="preco-desc">WordPress Completo</span>
+          </div>
+          <ul class="preco-list">
+            <li><span class="check" aria-hidden="true">✓</span> Site WordPress + Elementor</li>
+            <li><span class="check" aria-hidden="true">✓</span> Até 8 páginas</li>
+            <li><span class="check" aria-hidden="true">✓</span> Blog configurado</li>
+            <li><span class="check" aria-hidden="true">✓</span> Painel administrativo</li>
+            <li><span class="check" aria-hidden="true">✓</span> Plugins essenciais</li>
+            <li><span class="check" aria-hidden="true">✓</span> Treinamento de uso</li>
+            <li><span class="check" aria-hidden="true">✓</span> Entrega em 20 dias</li>
+            <li><span class="check" aria-hidden="true">✓</span> Suporte por 60 dias</li>
+          </ul>
+          <a href="#contato" class="btn-outline preco-cta">Quero este plano</a>
+        </div>
+      </div>
+      <p class="precos-nota reveal">Precisa de algo diferente? Me conta o projeto e faço um orçamento personalizado.</p>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="depoimentos" id="depoimentos">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Clientes</span>
+        <h2 class="section-title">Quem já trabalhou comigo</h2>
+      </div>
+      <!-- Carrossel ou grid renderizado por JS -->
+      <div id="dep-container" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contato" id="contato">
+    <div class="hero-glow ct-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="contato-inner">
+        <div class="contato-info reveal">
+          <span class="section-label">Contato</span>
+          <h2 class="section-title">Vamos construir<br />seu site juntos</h2>
+          <p class="contato-desc">Me conta sobre seu negócio e o que você precisa. Respondo em até 24 horas.</p>
+          <div class="contato-links">
+            <a id="whatsapp-link" href="https://wa.me/5521994882394?text=Ol%C3%A1%20Antonio!" class="contact-item whatsapp-link" target="_blank" rel="noopener">
+              <span class="ci-icon" aria-hidden="true">💬</span>
+              <div><strong>WhatsApp</strong><span id="contact-phone">(21) 99488-2394</span></div>
+            </a>
+            <a id="email-link" href="mailto:antonioluiz.dev@outlook.com" class="contact-item">
+              <span class="ci-icon" aria-hidden="true">✉️</span>
+              <div><strong>E-mail</strong><span id="contact-email">antonioluiz.dev@outlook.com</span></div>
+            </a>
+            <div class="contact-item">
+              <span class="ci-icon" aria-hidden="true">📍</span>
+              <div><strong>Localização</strong><span id="contact-location">Fragoso - Magé, RJ</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="contato-form-wrap reveal delay-1">
+          <form class="contato-form" id="contatoForm" novalidate>
+            <div class="form-group">
+              <label for="nome">Seu nome</label>
+              <input type="text" id="nome" name="nome" placeholder="João Silva" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="joao@empresa.com.br" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="tipo">Tipo de projeto</label>
+              <select id="tipo" name="tipo" required>
+                <option value="">Selecione...</option>
+                <option value="landing">Landing Page</option>
+                <option value="institucional">Site Institucional</option>
+                <option value="wordpress">Site WordPress</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mensagem">Conte sobre seu negócio</label>
+              <textarea id="mensagem" name="mensagem" rows="4" placeholder="O que você vende, quem é seu cliente, o que precisa no site..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary form-submit">Enviar mensagem</button>
+            <div class="form-success" id="formSuccess" role="alert">✓ Mensagem enviada! Te retorno em até 24h.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="admin.html" class="footer-brand footer-logo-link" title="" aria-label="Painel administrativo">
+          <img id="site-logo-footer" src="" alt="AL Desenvolvimento Web" class="logo-img logo-img-footer" />
+          <span class="logo-fallback" id="logo-fallback-footer">
+            <span class="nav-logo-al">AL</span>
+            <span class="nav-logo-text">Desenvolvimento Web</span>
+          </span>
+        </a>
+        <p class="footer-copy">© 2026 AL Desenvolvimento Web. Todos os direitos reservados.<br>Fragoso - Magé, RJ.</p>
+        <div class="footer-links">
+          <a href="#sobre">Sobre</a>
+          <a href="#portfolio">Portfólio</a>
+          <a href="#precos">Preços</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
