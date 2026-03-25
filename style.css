@@ -333,14 +333,14 @@ body:has(a:hover) .cursor-follower {
 
 /* ===================== LOGO ===================== */
 .logo-img {
-  height: 46px;
+  height: 36px;
   width: auto;
   object-fit: contain;
   display: block;
 }
 
 .logo-img-footer {
-  height: 42px;
+  height: 32px;
 }
 
 @media(min-width:640px) {
@@ -978,8 +978,6 @@ body:has(a:hover) .cursor-follower {
   gap: 8px;
   justify-content: center;
   margin-top: 20px;
-  position: relative;  /* garante que fica acima do photo-accent */
-  z-index: 2;
 }
 
 .tech-badge {
