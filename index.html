@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AL Desenvolvimento Web | Sites Profissionais para Negócios</title>
-  <meta name="description" content="Criação de sites e landing pages profissionais para pequenas e médias empresas. Responsive, rápidos e focados em resultados." />
+  <meta name="description"
+    content="Criação de sites e landing pages profissionais para pequenas e médias empresas. Responsive, rápidos e focados em resultados." />
   <meta name="theme-color" content="#080C18" />
-
-  <!-- Fonts -->
+  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <div class="cursor" id="cursor"></div>
@@ -22,22 +27,20 @@
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo" id="nav-logo-link">
-        <img id="site-logo-nav" src="./assets/AL Desenvolvmento Web (contrato).png" alt="AL Desenvolvimento Web" class="logo-img" />
-        <span class="logo-fallback" id="logo-fallback-nav">
-          <span class="nav-logo-al">AL</span>
-          <span class="nav-logo-text">Desenvolvimento Web</span>
-        </span>
+      <!-- LOGO: só a imagem. O JS troca o src se o Firebase tiver outra logo cadastrada. -->
+      <a href="#hero" class="nav-logo">
+        <img id="site-logo-nav" src="./assets/AL Desenvolvmento Web (contrato).png" alt="AL Desenvolvimento Web"
+          class="logo-img" />
       </a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks" role="navigation">
-        <li><a href="#sobre"     class="nav-link">Sobre</a></li>
+        <li><a href="#sobre" class="nav-link">Sobre</a></li>
         <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
-        <li><a href="#servicos"  class="nav-link">Serviços</a></li>
-        <li><a href="#precos"    class="nav-link">Preços</a></li>
-        <li><a href="#contato"   class="nav-cta">Fale Comigo</a></li>
+        <li><a href="#servicos" class="nav-link">Serviços</a></li>
+        <li><a href="#precos" class="nav-link">Preços</a></li>
+        <li><a href="#contato" class="nav-cta">Fale Comigo</a></li>
       </ul>
     </div>
   </nav>
@@ -58,11 +61,12 @@
         <span class="gradient-text">vendem de verdade</span>
       </h1>
       <p class="hero-sub reveal delay-2">
-        Crio sites e landing pages para pequenas e médias empresas que querem presença digital profissional, sem complicação.
+        Crio sites e landing pages para pequenas e médias empresas que querem presença digital profissional, sem
+        complicação.
       </p>
       <div class="hero-actions reveal delay-3">
         <a href="#portfolio" class="btn-primary">Ver meus trabalhos</a>
-        <a href="#contato"   class="btn-outline">Solicitar orçamento</a>
+        <a href="#contato" class="btn-outline">Solicitar orçamento</a>
       </div>
       <div class="hero-stats reveal delay-4">
         <div class="stat">
@@ -120,6 +124,7 @@
             </div>
           </div>
           <div class="photo-accent" aria-hidden="true"></div>
+          <!-- badges ficam FORA do photo-frame, em container próprio -->
           <div class="tech-stack-badges" aria-label="Tecnologias utilizadas">
             <span class="tech-badge">HTML5</span>
             <span class="tech-badge">CSS3</span>
@@ -129,27 +134,36 @@
             <span class="tech-badge">Git</span>
           </div>
         </div>
+
         <div class="sobre-text reveal delay-1">
           <span class="section-label">Sobre mim</span>
           <h2 class="section-title">Antonio Luiz,<br />desenvolvedor web</h2>
           <p class="sobre-desc" id="about-desc-1">
-            Fundei a AL Desenvolvimento Web para resolver um problema real: pequenas e médias empresas que precisam de presença digital profissional, mas encontram soluções caras ou de baixa qualidade no mercado.
+            Fundei a AL Desenvolvimento Web para resolver um problema real: pequenas e médias empresas que precisam de
+            presença digital profissional, mas encontram soluções caras ou de baixa qualidade no mercado.
           </p>
           <p class="sobre-desc" id="about-desc-2">
-            Trabalho com HTML, CSS, JavaScript e WordPress para entregar sites responsivos, rápidos e focados em resultados. Cada projeto recebe atenção individual, do briefing ao lançamento.
+            Trabalho com HTML, CSS, JavaScript e WordPress para entregar sites responsivos, rápidos e focados em
+            resultados. Cada projeto recebe atenção individual, do briefing ao lançamento.
           </p>
           <div class="sobre-values">
             <div class="value-item">
               <span class="value-icon" aria-hidden="true">🎯</span>
-              <div><strong>Foco em resultado</strong><p>O site existe para gerar clientes, não para ganhar prêmio de design.</p></div>
+              <div><strong>Foco em resultado</strong>
+                <p>O site existe para gerar clientes, não para ganhar prêmio de design.</p>
+              </div>
             </div>
             <div class="value-item">
               <span class="value-icon" aria-hidden="true">📱</span>
-              <div><strong>Mobile primeiro</strong><p>Mais de 70% dos usuários acessam pelo celular. Projeto pensando nisso.</p></div>
+              <div><strong>Mobile primeiro</strong>
+                <p>Mais de 70% dos usuários acessam pelo celular. Projeto pensando nisso.</p>
+              </div>
             </div>
             <div class="value-item">
               <span class="value-icon" aria-hidden="true">🤝</span>
-              <div><strong>Comunicação direta</strong><p>Sem intermediários. Você fala direto com quem faz.</p></div>
+              <div><strong>Comunicação direta</strong>
+                <p>Sem intermediários. Você fala direto com quem faz.</p>
+              </div>
             </div>
           </div>
           <a href="#contato" class="btn-primary">Falar sobre seu projeto</a>
@@ -244,10 +258,8 @@
         <div class="preco-card reveal">
           <div class="preco-header">
             <span class="preco-plano">Starter</span>
-            <div class="preco-valor">
-              <span class="preco-moeda">R$</span>
-              <span class="preco-num" id="price-starter">1.197</span>
-            </div>
+            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num"
+                id="price-starter">1.197</span></div>
             <span class="preco-desc">Landing Page</span>
           </div>
           <ul class="preco-list">
@@ -261,15 +273,12 @@
           </ul>
           <a href="#contato" class="btn-outline preco-cta">Quero este plano</a>
         </div>
-
         <div class="preco-card pc-featured reveal delay-1">
           <div class="pc-popular">Recomendado</div>
           <div class="preco-header">
             <span class="preco-plano">Profissional</span>
-            <div class="preco-valor">
-              <span class="preco-moeda">R$</span>
-              <span class="preco-num" id="price-pro">1.597</span>
-            </div>
+            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num"
+                id="price-pro">1.597</span></div>
             <span class="preco-desc">Site Institucional</span>
           </div>
           <ul class="preco-list">
@@ -284,14 +293,11 @@
           </ul>
           <a href="#contato" class="btn-primary preco-cta">Quero este plano</a>
         </div>
-
         <div class="preco-card reveal delay-2">
           <div class="preco-header">
             <span class="preco-plano">Business</span>
-            <div class="preco-valor">
-              <span class="preco-moeda">R$</span>
-              <span class="preco-num" id="price-business">1.997</span>
-            </div>
+            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num"
+                id="price-business">1.997</span></div>
             <span class="preco-desc">WordPress Completo</span>
           </div>
           <ul class="preco-list">
@@ -318,7 +324,6 @@
         <span class="section-label">Clientes</span>
         <h2 class="section-title">Quem já trabalhou comigo</h2>
       </div>
-      <!-- Carrossel ou grid renderizado por JS -->
       <div id="dep-container" aria-live="polite"></div>
     </div>
   </section>
@@ -333,7 +338,8 @@
           <h2 class="section-title">Vamos construir<br />seu site juntos</h2>
           <p class="contato-desc">Me conta sobre seu negócio e o que você precisa. Respondo em até 24 horas.</p>
           <div class="contato-links">
-            <a id="whatsapp-link" href="https://wa.me/5521994882394?text=Ol%C3%A1%20Antonio!" class="contact-item whatsapp-link" target="_blank" rel="noopener">
+            <a id="whatsapp-link" href="https://wa.me/5521994882394?text=Ol%C3%A1%20Antonio!"
+              class="contact-item whatsapp-link" target="_blank" rel="noopener">
               <span class="ci-icon" aria-hidden="true">💬</span>
               <div><strong>WhatsApp</strong><span id="contact-phone">(21) 99488-2394</span></div>
             </a>
@@ -355,7 +361,8 @@
             </div>
             <div class="form-group">
               <label for="email">E-mail</label>
-              <input type="email" id="email" name="email" placeholder="joao@empresa.com.br" required autocomplete="email" />
+              <input type="email" id="email" name="email" placeholder="joao@empresa.com.br" required
+                autocomplete="email" />
             </div>
             <div class="form-group">
               <label for="tipo">Tipo de projeto</label>
@@ -369,7 +376,8 @@
             </div>
             <div class="form-group">
               <label for="mensagem">Conte sobre seu negócio</label>
-              <textarea id="mensagem" name="mensagem" rows="4" placeholder="O que você vende, quem é seu cliente, o que precisa no site..." required></textarea>
+              <textarea id="mensagem" name="mensagem" rows="4"
+                placeholder="O que você vende, quem é seu cliente, o que precisa no site..." required></textarea>
             </div>
             <button type="submit" class="btn-primary form-submit">Enviar mensagem</button>
             <div class="form-success" id="formSuccess" role="alert">✓ Mensagem enviada! Te retorno em até 24h.</div>
@@ -383,12 +391,10 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
-        <a href="admin.html" class="footer-brand footer-logo-link" title="" aria-label="Painel administrativo">
-          <img id="site-logo-footer" src="" alt="AL Desenvolvimento Web" class="logo-img logo-img-footer" />
-          <span class="logo-fallback" id="logo-fallback-footer">
-            <span class="nav-logo-al">AL</span>
-            <span class="nav-logo-text">Desenvolvimento Web</span>
-          </span>
+        <!-- FOOTER LOGO: só a imagem, link oculto para o admin -->
+        <a href="admin.html" class="footer-logo-link" title="" aria-label="Painel administrativo">
+          <img id="site-logo-footer" src="./assets/AL Desenvolvmento Web (contrato).png" alt="AL Desenvolvimento Web"
+            class="logo-img logo-img-footer" />
         </a>
         <p class="footer-copy">© 2026 AL Desenvolvimento Web. Todos os direitos reservados.<br>Fragoso - Magé, RJ.</p>
         <div class="footer-links">
@@ -409,4 +415,5 @@
   <script src="firebase-config.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>

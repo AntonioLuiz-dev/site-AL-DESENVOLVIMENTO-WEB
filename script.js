@@ -1,6 +1,5 @@
 /* ============================================================
    AL DESENVOLVIMENTO WEB — script.js
-   Firebase Firestore + carrossel infinito
    ============================================================ */
 
 'use strict';
@@ -13,16 +12,16 @@ let db, storage, firebaseReady = false;
 try {
   if (typeof firebaseConfig !== 'undefined' && firebaseConfig.apiKey !== 'COLE_AQUI') {
     firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
+    db      = firebase.firestore();
     storage = firebase.storage();
     firebaseReady = true;
   }
 } catch (e) {
-  console.warn('Firebase não iniciado. Configure firebase-config.js.', e);
+  console.warn('Firebase não iniciado.', e);
 }
 
 /* ============================================================
-   SANITIZE — previne XSS
+   XSS PROTECTION
    ============================================================ */
 function sanitize(str) {
   const div = document.createElement('div');
@@ -31,19 +30,19 @@ function sanitize(str) {
 }
 
 /* ============================================================
-   DEFAULTS (usados quando Firebase não está configurado)
+   DEFAULTS
    ============================================================ */
 const DEFAULT_PORTFOLIO = [
-  { id:'0', title:'Dominique Personalizados', tag:'Landing Page', desc:'Landing page focada em conversão para loja de brindes e presentes personalizados.', link:'', image:'', category:'landing', techs:['HTML','CSS','JS'], order:0 },
-  { id:'1', title:"Favela's Barber Shop",     tag:'Site Institucional', desc:'Site para barbearia com galeria de trabalhos, preços e agendamento via WhatsApp.', link:'', image:'', category:'institucional', techs:['HTML','CSS','JS'], order:1 },
-  { id:'2', title:'Padaria Dona Eugênia',     tag:'Site Institucional', desc:'Site com cardápio digital, localização e contato para padaria local.', link:'', image:'', category:'institucional', techs:['HTML','CSS','JS'], order:2 },
-  { id:'3', title:'CEVIM',                    tag:'Site Institucional', desc:'Demo de site para escola com apresentação institucional e captação de matrículas.', link:'', image:'', category:'institucional', techs:['HTML','CSS','JS'], order:3 },
+  { id:'0', title:'Dominique Personalizados', tag:'Landing Page',     desc:'Landing page focada em conversão para loja de brindes e presentes personalizados.', link:'', image:'', category:'landing',       techs:['HTML','CSS','JS'], order:0 },
+  { id:'1', title:"Favela's Barber Shop",     tag:'Site Institucional', desc:'Site para barbearia com galeria de trabalhos e agendamento via WhatsApp.',        link:'', image:'', category:'institucional', techs:['HTML','CSS','JS'], order:1 },
+  { id:'2', title:'Padaria Dona Eugênia',     tag:'Site Institucional', desc:'Site com cardápio digital, localização e contato para padaria local.',             link:'', image:'', category:'institucional', techs:['HTML','CSS','JS'], order:2 },
+  { id:'3', title:'CEVIM',                    tag:'Site Institucional', desc:'Demo de site para escola com apresentação institucional e captação de matrículas.',link:'', image:'', category:'institucional', techs:['HTML','CSS','JS'], order:3 },
 ];
 
 const DEFAULT_TESTIMONIALS = [
   { id:'0', name:'Dominique', company:'Dominique Personalizados', text:'O site ficou exatamente como eu imaginava. Antonio entendeu meu negócio e entregou antes do prazo. Meus clientes adoraram.', rating:5 },
-  { id:'1', name:'Favela',    company:"Favela's Barber Shop",    text:'Profissional, direto ao ponto e comunicação excelente. O site trouxe novos clientes para a barbearia logo na primeira semana.', rating:5 },
-  { id:'2', name:'Eugênia',   company:'Padaria Dona Eugênia',   text:'Não entendia nada de site e ele foi paciente em tudo. Ficou lindo, aparece no Google e os clientes conseguem me encontrar.', rating:5 },
+  { id:'1', name:'Favela',    company:"Favela's Barber Shop",    text:'Profissional, direto ao ponto e comunicação excelente. O site trouxe novos clientes logo na primeira semana.',                rating:5 },
+  { id:'2', name:'Eugênia',   company:'Padaria Dona Eugênia',   text:'Não entendia nada de site e ele foi paciente em tudo. Ficou lindo, aparece no Google e os clientes me encontram.',            rating:5 },
 ];
 
 /* ============================================================
@@ -57,46 +56,38 @@ async function initSite() {
   }
 
   try {
-    // Config geral
     const configSnap = await db.collection('config').doc('main').get();
-    if (configSnap.exists) {
-      applyConfig(configSnap.data());
-    }
+    if (configSnap.exists) applyConfig(configSnap.data());
 
-    // Portfolio
     const pfSnap = await db.collection('portfolio').orderBy('order').get();
     const portfolio = pfSnap.docs.map(d => ({ id: d.id, ...d.data() }));
     renderPortfolio(portfolio.length ? portfolio : DEFAULT_PORTFOLIO);
 
-    // Depoimentos
     const depSnap = await db.collection('testimonials').orderBy('order').get();
     const deps = depSnap.docs.map(d => ({ id: d.id, ...d.data() }));
     renderTestimonials(deps.length ? deps : DEFAULT_TESTIMONIALS);
 
   } catch (e) {
-    console.warn('Erro ao carregar dados do Firebase. Usando padrão.', e);
+    console.warn('Erro Firebase. Usando dados padrão.', e);
     renderPortfolio(DEFAULT_PORTFOLIO);
     renderTestimonials(DEFAULT_TESTIMONIALS);
   }
 }
 
 /* ============================================================
-   APPLY CONFIG
+   APPLY CONFIG (Firebase → página)
+   IMPORTANTE: a logo local (./assets/...) já está no src do HTML.
+   Aqui só substituímos o src se o Firebase tiver uma logo cadastrada.
+   Nunca escondemos a imagem — sem texto duplicado.
    ============================================================ */
 function applyConfig(d) {
-  // Logo
-  const logoSrc = d.logo || '';
-  ['site-logo-nav', 'site-logo-footer'].forEach((id, i) => {
-    const img = document.getElementById(id);
-    const fallback = document.getElementById(i === 0 ? 'logo-fallback-nav' : 'logo-fallback-footer');
-    if (logoSrc && img) {
-      img.src = logoSrc; img.style.display = 'block';
-      if (fallback) fallback.style.display = 'none';
-    } else {
-      if (img) img.style.display = 'none';
-      if (fallback) fallback.style.display = 'flex';
-    }
-  });
+  // Logo: só atualiza o src se Firebase tiver uma URL salva
+  if (d.logo) {
+    const navImg    = document.getElementById('site-logo-nav');
+    const footerImg = document.getElementById('site-logo-footer');
+    if (navImg)    navImg.src    = d.logo;
+    if (footerImg) footerImg.src = d.logo;
+  }
 
   // Foto sobre mim
   if (d.aboutPhoto) {
@@ -106,7 +97,7 @@ function applyConfig(d) {
     if (ph)  ph.style.display = 'none';
   }
 
-  // Textos sobre mim
+  // Textos
   if (d.aboutDesc1) setText('about-desc-1', d.aboutDesc1);
   if (d.aboutDesc2) setText('about-desc-2', d.aboutDesc2);
 
@@ -146,22 +137,21 @@ const THUMB_CLASSES = ['ct-1','ct-2','ct-3','ct-4','ct-5','ct-6'];
 function renderPortfolio(items) {
   const grid = document.getElementById('portfolio-grid');
   if (!grid) return;
-
   grid.innerHTML = '';
 
-  if (!items || items.length === 0) {
-    grid.innerHTML = '<p style="color:var(--muted);text-align:center;padding:40px">Nenhum projeto ainda.</p>';
+  if (!items || !items.length) {
+    grid.innerHTML = '<p style="color:var(--muted);text-align:center;padding:40px;grid-column:1/-1">Nenhum projeto ainda.</p>';
     return;
   }
 
   items.forEach((proj, i) => {
     const thumbClass = THUMB_CLASSES[i % THUMB_CLASSES.length];
     const hasImage   = proj.image && proj.image.trim();
-    const hasLink    = proj.link && proj.link.trim();
+    const hasLink    = proj.link  && proj.link.trim();
     const techs      = Array.isArray(proj.techs) ? proj.techs : ['HTML','CSS','JS'];
 
     const card = document.createElement('div');
-    card.className = 'portfolio-card reveal';
+    card.className        = 'portfolio-card reveal';
     card.dataset.category = sanitize(proj.category || 'institucional');
 
     card.innerHTML = `
@@ -169,29 +159,24 @@ function renderPortfolio(items) {
         <div class="card-overlay">
           ${hasLink
             ? `<a href="${sanitize(proj.link)}" class="card-link-btn" target="_blank" rel="noopener noreferrer">Ver projeto</a>`
-            : `<span class="card-link-btn" style="opacity:.4;cursor:default">Em breve</span>`
-          }
+            : `<span class="card-link-btn" style="opacity:.4;cursor:default">Em breve</span>`}
         </div>
         ${hasImage
           ? `<img class="card-project-img" src="${sanitize(proj.image)}" alt="${sanitize(proj.title)}" style="display:block" loading="lazy" />`
-          : `<div class="card-mock"><div class="cm-header"></div><div class="cm-body"><div class="cm-block b1"></div><div class="cm-block b2"></div></div></div>`
-        }
+          : `<div class="card-mock"><div class="cm-header"></div><div class="cm-body"><div class="cm-block b1"></div><div class="cm-block b2"></div></div></div>`}
       </div>
       <div class="card-info">
         <span class="card-tag">${sanitize(proj.tag || 'Projeto')}</span>
         <h3 class="card-title">${sanitize(proj.title)}</h3>
         <p class="card-desc">${sanitize(proj.desc)}</p>
         <div class="card-techs">${techs.map(t => `<span>${sanitize(t)}</span>`).join('')}</div>
-      </div>
-    `;
+      </div>`;
 
     grid.appendChild(card);
   });
 
-  // Re-observar para animação reveal
   grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // Re-aplicar filtros
   const activeFilter = document.querySelector('.filter-btn.active');
   if (activeFilter) applyFilter(activeFilter.dataset.filter);
 }
@@ -200,16 +185,14 @@ function renderPortfolio(items) {
    RENDER TESTIMONIALS
    ============================================================ */
 const CAROUSEL_THRESHOLD = 4;
-
 let carouselInstance = null;
 
 function renderTestimonials(items) {
   const container = document.getElementById('dep-container');
   if (!container) return;
-
   container.innerHTML = '';
 
-  if (!items || items.length === 0) {
+  if (!items || !items.length) {
     container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:40px">Nenhum depoimento ainda.</p>';
     return;
   }
@@ -217,12 +200,12 @@ function renderTestimonials(items) {
   if (items.length >= CAROUSEL_THRESHOLD) {
     renderCarousel(container, items);
   } else {
-    renderGrid(container, items);
+    renderDepGrid(container, items);
   }
 }
 
 function buildDepCard(dep) {
-  const stars = '★'.repeat(Math.max(1, Math.min(5, dep.rating || 5)));
+  const stars    = '★'.repeat(Math.max(1, Math.min(5, dep.rating || 5)));
   const initials = (dep.name || 'C').charAt(0).toUpperCase();
   const div = document.createElement('div');
   div.className = 'dep-card';
@@ -235,12 +218,11 @@ function buildDepCard(dep) {
         <strong>${sanitize(dep.name)}</strong>
         <span>${sanitize(dep.company)}</span>
       </div>
-    </div>
-  `;
+    </div>`;
   return div;
 }
 
-function renderGrid(container, items) {
+function renderDepGrid(container, items) {
   const grid = document.createElement('div');
   grid.className = 'dep-grid';
   items.forEach((dep, i) => {
@@ -253,18 +235,15 @@ function renderGrid(container, items) {
 }
 
 function renderCarousel(container, items) {
-  const wrap = document.createElement('div');
+  const wrap  = document.createElement('div');
   wrap.className = 'dep-carousel-wrap reveal';
 
   const track = document.createElement('div');
   track.className = 'dep-track';
-
   items.forEach(dep => track.appendChild(buildDepCard(dep)));
-
   wrap.appendChild(track);
   container.appendChild(wrap);
 
-  // Dots
   const dotsWrap = document.createElement('div');
   dotsWrap.className = 'carousel-dots';
   items.forEach((_, i) => {
@@ -274,10 +253,8 @@ function renderCarousel(container, items) {
     dotsWrap.appendChild(dot);
   });
   container.appendChild(dotsWrap);
-
   revealObserver.observe(wrap);
 
-  // Init carousel after a brief delay so layout is ready
   setTimeout(() => {
     if (carouselInstance) carouselInstance.destroy();
     carouselInstance = new InfiniteCarousel(wrap, track, items.length, dotsWrap);
@@ -289,40 +266,36 @@ function renderCarousel(container, items) {
    ============================================================ */
 class InfiniteCarousel {
   constructor(wrap, track, count, dotsWrap) {
-    this.wrap = wrap;
-    this.track = track;
-    this.count = count;
-    this.dotsWrap = dotsWrap;
-    this.dots = dotsWrap ? [...dotsWrap.querySelectorAll('.carousel-dot')] : [];
-    this.pos = 0;
-    this.speed = 0.45;
-    this.paused = false;
-    this.raf = null;
+    this.wrap      = wrap;
+    this.track     = track;
+    this.count     = count;
+    this.dotsWrap  = dotsWrap;
+    this.dots      = dotsWrap ? [...dotsWrap.querySelectorAll('.carousel-dot')] : [];
+    this.pos       = 0;
+    this.speed     = 0.45;
+    this.paused    = false;
+    this.raf       = null;
     this.activeDot = 0;
-
     this._clone();
     this._bindEvents();
     this._tick();
   }
 
   _clone() {
-    const originals = [...this.track.children];
-    originals.forEach(el => {
+    [...this.track.children].forEach(el => {
       const clone = el.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
       this.track.appendChild(clone);
     });
-    // Also prepend clones for smoother reverse (optional — left out for simplicity)
     this._measure();
   }
 
   _measure() {
-    const firstCard = this.track.firstElementChild;
-    if (!firstCard) return;
-    const style = getComputedStyle(this.track);
-    const gap = parseFloat(style.gap) || 20;
-    this.cardW = firstCard.offsetWidth + gap;
-    this.setW  = this.cardW * this.count;
+    const first = this.track.firstElementChild;
+    if (!first) return;
+    const gap   = parseFloat(getComputedStyle(this.track).gap) || 20;
+    this.cardW  = first.offsetWidth + gap;
+    this.setW   = this.cardW * this.count;
   }
 
   _bindEvents() {
@@ -330,14 +303,9 @@ class InfiniteCarousel {
     this.wrap.addEventListener('mouseleave', () => this.paused = false);
     this.wrap.addEventListener('touchstart', () => { this.paused = true; }, { passive: true });
     this.wrap.addEventListener('touchend',   () => { setTimeout(() => this.paused = false, 2500); }, { passive: true });
-
     this.dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        this.pos = -(i * this.cardW);
-        this._updateDots(i);
-      });
+      dot.addEventListener('click', () => { this.pos = -(i * this.cardW); this._updateDots(i); });
     });
-
     window.addEventListener('resize', () => {
       clearTimeout(this._resizeTimer);
       this._resizeTimer = setTimeout(() => this._measure(), 200);
@@ -352,27 +320,17 @@ class InfiniteCarousel {
   _tick() {
     if (!this.paused) {
       this.pos -= this.speed;
-
-      // Seamless loop
-      if (this.setW > 0 && this.pos <= -this.setW) {
-        this.pos = 0;
-      }
-
+      if (this.setW > 0 && this.pos <= -this.setW) this.pos = 0;
       this.track.style.transform = `translateX(${this.pos}px)`;
-
-      // Update active dot
-      if (this.dots.length > 0 && this.setW > 0) {
-        const normalized = Math.abs(this.pos) % this.setW;
-        const idx = Math.floor(normalized / this.cardW) % this.count;
+      if (this.dots.length && this.setW > 0) {
+        const idx = Math.floor(Math.abs(this.pos) % this.setW / this.cardW) % this.count;
         if (idx !== this.activeDot) this._updateDots(idx);
       }
     }
     this.raf = requestAnimationFrame(() => this._tick());
   }
 
-  destroy() {
-    if (this.raf) cancelAnimationFrame(this.raf);
-  }
+  destroy() { if (this.raf) cancelAnimationFrame(this.raf); }
 }
 
 /* ============================================================
@@ -451,7 +409,6 @@ if (hamburger && navLinks) {
     });
   });
 
-  // Fecha com ESC
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && navLinks.classList.contains('mobile-open')) {
       navLinks.classList.remove('mobile-open');
@@ -468,10 +425,7 @@ if (hamburger && navLinks) {
    ============================================================ */
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      revealObserver.unobserve(e.target);
-    }
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
@@ -492,19 +446,17 @@ function animateCounter(el, target, duration = 1400) {
 
 const statsEl = document.querySelector('.hero-stats');
 if (statsEl) {
-  const statsObserver = new IntersectionObserver(entries => {
+  new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
       entries[0].target.querySelectorAll('[data-target]').forEach(n => animateCounter(n, +n.dataset.target));
-      statsObserver.unobserve(entries[0].target);
     }
-  }, { threshold: 0.5 });
-  statsObserver.observe(statsEl);
+  }, { threshold: 0.5 }).observe(statsEl);
 }
 
 /* ============================================================
    SCROLL SPY
    ============================================================ */
-const spyObserver = new IntersectionObserver(entries => {
+new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       const id = e.target.id;
@@ -513,9 +465,20 @@ const spyObserver = new IntersectionObserver(entries => {
       });
     }
   });
-}, { threshold: 0.35 });
+}, { threshold: 0.35 }).observe(...document.querySelectorAll('section[id]') || []);
 
-document.querySelectorAll('section[id]').forEach(s => spyObserver.observe(s));
+document.querySelectorAll('section[id]').forEach(s => {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, { threshold: 0.35 }).observe(s);
+});
 
 /* ============================================================
    SMOOTH ANCHOR SCROLL
@@ -525,9 +488,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const target = document.querySelector(this.getAttribute('href'));
     if (!target) return;
     e.preventDefault();
-    const offset = 72;
-    const top = target.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
   });
 });
 
@@ -538,16 +499,15 @@ const form = document.getElementById('contatoForm');
 if (form) {
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    const btn = form.querySelector('.form-submit');
+    const btn   = form.querySelector('.form-submit');
     btn.textContent = 'Enviando...'; btn.disabled = true;
 
     const nome  = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
     const tipo  = document.getElementById('tipo').value;
     const msg   = document.getElementById('mensagem').value.trim();
-
     const labels = { landing:'Landing Page', institucional:'Site Institucional', wordpress:'Site WordPress', outro:'Outro' };
-    const wa = encodeURIComponent(`Olá Antonio! Me chamo ${nome}.\n\nE-mail: ${email}\nTipo: ${labels[tipo]||tipo}\n\n${msg}`);
+    const wa    = encodeURIComponent(`Olá Antonio! Me chamo ${nome}.\n\nE-mail: ${email}\nTipo: ${labels[tipo]||tipo}\n\n${msg}`);
 
     let waNum = '5521994882394';
     if (firebaseReady) {
@@ -567,7 +527,7 @@ if (form) {
 }
 
 /* ============================================================
-   KEYFRAMES INJETADOS
+   KEYFRAMES
    ============================================================ */
 const styleEl = document.createElement('style');
 styleEl.textContent = `
