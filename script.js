@@ -11,13 +11,13 @@ if (cursor && cursorFollower) {
   document.addEventListener('mousemove', e => {
     mX = e.clientX; mY = e.clientY;
     cursor.style.left = mX + 'px';
-    cursor.style.top = mY + 'px';
+    cursor.style.top  = mY + 'px';
   });
   (function tick() {
     fX += (mX - fX) * .12;
     fY += (mY - fY) * .12;
     cursorFollower.style.left = fX + 'px';
-    cursorFollower.style.top = fY + 'px';
+    cursorFollower.style.top  = fY + 'px';
     requestAnimationFrame(tick);
   })();
 }
@@ -34,7 +34,7 @@ onScroll();
    HAMBURGER
    ============================================================ */
 const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+const navLinks  = document.getElementById('navLinks');
 
 if (hamburger && navLinks) {
   hamburger.addEventListener('click', () => {
@@ -69,9 +69,12 @@ if (hamburger && navLinks) {
    ============================================================ */
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
@@ -117,7 +120,7 @@ document.querySelectorAll('section[id]').forEach(s => {
    SMOOTH ANCHOR SCROLL
    ============================================================ */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', function (e) {
+  a.addEventListener('click', function(e) {
     const target = document.querySelector(this.getAttribute('href'));
     if (!target) return;
     e.preventDefault();
@@ -145,13 +148,14 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 /* ============================================================
-   DEPOIMENTOS — grade ou carrossel infinito
-   Lê os .dep-card de #dep-cards-source e:
-     < 4 cards  → grade normal
-     >= 4 cards → carrossel infinito automático
+   DEPOIMENTOS
+   ──────────────────────────────────────────────────────────
+   Lê os .dep-card de #dep-cards-source.
+   < 4 cards  → grade simples, sem reveal individual (garante visibilidade)
+   >= 4 cards → carrossel infinito automático
    ============================================================ */
 (function initDepoimentos() {
-  const source = document.getElementById('dep-cards-source');
+  const source    = document.getElementById('dep-cards-source');
   const container = document.getElementById('dep-container');
   if (!source || !container) return;
 
@@ -161,29 +165,48 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   const THRESHOLD = 4;
 
   if (cards.length < THRESHOLD) {
-    // Grade normal
+    /* ── GRADE NORMAL ──
+       Não usamos a classe .reveal nos cards individuais para evitar que
+       o IntersectionObserver deixe os cards invisíveis caso o timing de
+       observação falhe. Em vez disso, usamos uma animação CSS direta
+       na grade inteira via .dep-grid-animate. */
     const grid = document.createElement('div');
-    grid.className = 'dep-grid';
+    grid.className = 'dep-grid dep-grid-animate';
+
     cards.forEach((card, i) => {
       const clone = card.cloneNode(true);
-      clone.classList.add('reveal', ['', 'delay-1', 'delay-2'][i % 3]);
+      /* atraso crescente para efeito cascata */
+      clone.style.animationDelay = (i * 0.12) + 's';
       grid.appendChild(clone);
     });
+
     container.appendChild(grid);
-    grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* Dispara a animação quando a seção entrar no viewport */
+    const section = document.getElementById('depoimentos');
+    if (section) {
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          grid.classList.add('dep-grid-visible');
+          obs.disconnect();
+        }
+      }, { threshold: 0.1 });
+      obs.observe(section);
+    } else {
+      /* fallback: mostra imediatamente */
+      grid.classList.add('dep-grid-visible');
+    }
 
   } else {
-    // Carrossel infinito
-    const wrap = document.createElement('div');
-    wrap.className = 'dep-carousel-wrap reveal';
+    /* ── CARROSSEL INFINITO ── */
+    const wrap  = document.createElement('div');
+    wrap.className = 'dep-carousel-wrap';
 
     const track = document.createElement('div');
     track.className = 'dep-track';
 
-    // Originais
     cards.forEach(card => track.appendChild(card.cloneNode(true)));
-
-    // Clones para loop
+    /* clones para loop seamless */
     cards.forEach(card => {
       const clone = card.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
@@ -193,7 +216,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     wrap.appendChild(track);
     container.appendChild(wrap);
 
-    // Dots
+    /* Dots */
     const dotsWrap = document.createElement('div');
     dotsWrap.className = 'carousel-dots';
     cards.forEach((_, i) => {
@@ -204,9 +227,20 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
     container.appendChild(dotsWrap);
 
-    revealObserver.observe(wrap);
+    /* Anima o wrapper quando a seção entrar no viewport */
+    const section = document.getElementById('depoimentos');
+    if (section) {
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          wrap.style.opacity = '1';
+          obs.disconnect();
+        }
+      }, { threshold: 0.1 });
+      obs.observe(section);
+    } else {
+      wrap.style.opacity = '1';
+    }
 
-    // Inicia carrossel após layout
     setTimeout(() => startCarousel(wrap, track, cards.length, dotsWrap), 250);
   }
 })();
@@ -221,7 +255,7 @@ function startCarousel(wrap, track, count, dotsWrap) {
     if (!first) return;
     const gap = parseFloat(getComputedStyle(track).gap) || 20;
     cardW = first.offsetWidth + gap;
-    setW = cardW * count;
+    setW  = cardW * count;
   }
   measure();
 
@@ -237,11 +271,11 @@ function startCarousel(wrap, track, count, dotsWrap) {
   wrap.addEventListener('mouseenter', () => paused = true);
   wrap.addEventListener('mouseleave', () => paused = false);
   wrap.addEventListener('touchstart', () => { paused = true; }, { passive: true });
-  wrap.addEventListener('touchend', () => { setTimeout(() => paused = false, 2500); }, { passive: true });
+  wrap.addEventListener('touchend',   () => { setTimeout(() => paused = false, 2500); }, { passive: true });
 
   window.addEventListener('resize', () => {
-    clearTimeout(wrap._resizeTimer);
-    wrap._resizeTimer = setTimeout(measure, 200);
+    clearTimeout(wrap._rt);
+    wrap._rt = setTimeout(measure, 200);
   });
 
   (function tick() {
@@ -265,17 +299,16 @@ const form = document.getElementById('contatoForm');
 if (form) {
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const btn = form.querySelector('.form-submit');
+    const btn  = form.querySelector('.form-submit');
     btn.textContent = 'Enviando...'; btn.disabled = true;
 
     const nome = document.getElementById('nome').value.trim();
     const mail = document.getElementById('email').value.trim();
     const tipo = document.getElementById('tipo').value;
-    const msg = document.getElementById('mensagem').value.trim();
-    const tipos = { landing: 'Landing Page', institucional: 'Site Institucional', wordpress: 'Site WordPress', outro: 'Outro' };
-    const wa = encodeURIComponent(`Olá Antonio! Me chamo ${nome}.\n\nE-mail: ${mail}\nTipo: ${tipos[tipo] || tipo}\n\n${msg}`);
+    const msg  = document.getElementById('mensagem').value.trim();
+    const tipos = { landing:'Landing Page', institucional:'Site Institucional', wordpress:'Site WordPress', outro:'Outro' };
+    const wa   = encodeURIComponent(`Olá Antonio! Me chamo ${nome}.\n\nE-mail: ${mail}\nTipo: ${tipos[tipo]||tipo}\n\n${msg}`);
 
-    // Troque o número abaixo pelo seu WhatsApp real (com DDI e DDD, sem + ou espaços)
     const waNum = '5521994882394';
 
     setTimeout(() => {
@@ -292,7 +325,25 @@ if (form) {
    ============================================================ */
 const s = document.createElement('style');
 s.textContent = `
-  @keyframes fadeInUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
-  .nav-link.active { color: var(--white) !important; background: rgba(255,255,255,.06) !important; }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .nav-link.active {
+    color: var(--white) !important;
+    background: rgba(255,255,255,.06) !important;
+  }
+
+  /* Grade de depoimentos: cards invisíveis por padrão */
+  .dep-grid-animate .dep-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  /* Quando a classe visible é adicionada, cada card aparece com seu delay */
+  .dep-grid-visible .dep-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 document.head.appendChild(s);
