@@ -8,9 +8,9 @@
   <meta name="description"
     content="Criação de sites e landing pages profissionais para pequenas e médias empresas. Responsive, rápidos e focados em resultados." />
   <meta name="theme-color" content="#080C18" />
-  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -24,18 +24,18 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="cursorFollower"></div>
 
-  <!-- NAV -->
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <!-- LOGO: só a imagem. O JS troca o src se o Firebase tiver outra logo cadastrada. -->
       <a href="#hero" class="nav-logo">
-        <img id="site-logo-nav" src="./assets/AL Desenvolvmento Web (contrato).png" alt="AL Desenvolvimento Web"
-          class="logo-img" />
+        <img src="./assets/AL Desenvolvmento Web (contrato).png" alt="AL Desenvolvimento Web" class="logo-img" />
       </a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav-links" id="navLinks" role="navigation">
+      <ul class="nav-links" id="navLinks">
         <li><a href="#sobre" class="nav-link">Sobre</a></li>
         <li><a href="#portfolio" class="nav-link">Portfólio</a></li>
         <li><a href="#servicos" class="nav-link">Serviços</a></li>
@@ -45,7 +45,9 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
   <section class="hero" id="hero">
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
@@ -90,7 +92,7 @@
       <div class="browser-mockup">
         <div class="browser-bar">
           <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <div class="browser-url">aldesenvolvimentoweb.com.br</div>
+          <div class="browser-url">aldesenvolvimentoweb.vercel.app</div>
         </div>
         <div class="browser-content">
           <div class="mock-hero-bar"></div>
@@ -111,20 +113,20 @@
     </div>
   </section>
 
-  <!-- SOBRE -->
+  <!-- ============================================================
+       SOBRE
+  ============================================================ -->
   <section class="sobre" id="sobre">
     <div class="container">
       <div class="sobre-inner">
+
         <div class="sobre-photo-wrap reveal">
           <div class="photo-frame">
-            <img id="about-photo" src="./assets/Antonio Luiz.png" alt="Antonio Luiz" class="about-photo-img" />
-            <div class="photo-placeholder" id="photo-fallback">
-              <div class="photo-initials">AL</div>
-              <p class="photo-hint">Sua foto aqui</p>
-            </div>
+            <img src="./assets/Antonio Luiz.png" alt="Antonio Luiz" class="about-photo-img" />
           </div>
           <div class="photo-accent" aria-hidden="true"></div>
-          <!-- badges ficam FORA do photo-frame, em container próprio -->
+
+          <!-- ── BADGES: ficam abaixo do frame, sem sobreposição ── -->
           <div class="tech-stack-badges" aria-label="Tecnologias utilizadas">
             <span class="tech-badge">HTML5</span>
             <span class="tech-badge">CSS3</span>
@@ -138,41 +140,73 @@
         <div class="sobre-text reveal delay-1">
           <span class="section-label">Sobre mim</span>
           <h2 class="section-title">Antonio Luiz,<br />desenvolvedor web</h2>
-          <p class="sobre-desc" id="about-desc-1">
+          <p class="sobre-desc">
             Fundei a AL Desenvolvimento Web para resolver um problema real: pequenas e médias empresas que precisam de
             presença digital profissional, mas encontram soluções caras ou de baixa qualidade no mercado.
           </p>
-          <p class="sobre-desc" id="about-desc-2">
+          <p class="sobre-desc">
             Trabalho com HTML, CSS, JavaScript, React e WordPress para entregar sites responsivos, rápidos e focados em
             resultados. Cada projeto recebe atenção individual, do briefing ao lançamento.
           </p>
           <div class="sobre-values">
             <div class="value-item">
               <span class="value-icon" aria-hidden="true">🎯</span>
-              <div><strong>Foco em resultado</strong>
+              <div>
+                <strong>Foco em resultado</strong>
                 <p>O site existe para gerar clientes, não para ganhar prêmio de design.</p>
               </div>
             </div>
             <div class="value-item">
               <span class="value-icon" aria-hidden="true">📱</span>
-              <div><strong>Mobile primeiro</strong>
+              <div>
+                <strong>Mobile primeiro</strong>
                 <p>Mais de 70% dos usuários acessam pelo celular. Projeto pensando nisso.</p>
               </div>
             </div>
             <div class="value-item">
               <span class="value-icon" aria-hidden="true">🤝</span>
-              <div><strong>Comunicação direta</strong>
+              <div>
+                <strong>Comunicação direta</strong>
                 <p>Sem intermediários. Você fala direto com quem faz.</p>
               </div>
             </div>
           </div>
           <a href="#contato" class="btn-primary">Falar sobre seu projeto</a>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- PORTFOLIO -->
+  <!-- ============================================================
+       PORTFÓLIO
+       ──────────────────────────────────────────────────────────
+       COMO EDITAR CADA CARD:
+
+       1. Imagem do projeto:
+          Troque o src da tag <img class="card-project-img"> pelo
+          caminho da sua screenshot, ex: ./assets/projeto-nome.jpg
+          Se não tiver imagem ainda, deixe o bloco <div class="card-mock">
+          no lugar e remova a tag <img>.
+
+       2. Link do projeto:
+          No <a class="card-link-btn"> troque href="#" pela URL real,
+          ex: href="https://dominiquepersonalizados.com.br"
+          Se o projeto não tiver URL ainda, deixe href="#" ou troque
+          o <a> por <span> e adicione style="opacity:.4;cursor:default".
+
+       3. Tag / categoria:
+          Altere o texto do <span class="card-tag"> e o data-category
+          do card para um desses valores: landing | institucional | ecommerce
+
+       4. Tecnologias:
+          Adicione ou remova <span> dentro de <div class="card-techs">.
+
+       5. Adicionar novo card:
+          Copie um bloco <div class="portfolio-card"> inteiro e cole
+          antes do fechamento de <div class="portfolio-grid">.
+          Use as classes de fundo ct-1 até ct-6 para variar a cor.
+  ============================================================ -->
   <section class="portfolio" id="portfolio">
     <div class="container">
       <div class="section-header reveal">
@@ -180,22 +214,123 @@
         <h2 class="section-title">Trabalhos entregues</h2>
         <p class="section-sub">Projetos reais para clientes reais.</p>
       </div>
-      <div class="portfolio-filters reveal delay-1" id="portfolio-filters" role="group" aria-label="Filtrar projetos">
+
+      <div class="portfolio-filters reveal delay-1" role="group" aria-label="Filtrar projetos">
         <button class="filter-btn active" data-filter="all">Todos</button>
         <button class="filter-btn" data-filter="landing">Landing Pages</button>
         <button class="filter-btn" data-filter="institucional">Institucionais</button>
         <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
       </div>
-      <div class="portfolio-grid" id="portfolio-grid" aria-live="polite">
-        <div class="portfolio-skeleton"></div>
-        <div class="portfolio-skeleton"></div>
-        <div class="portfolio-skeleton"></div>
-        <div class="portfolio-skeleton"></div>
+
+      <div class="portfolio-grid">
+
+        <!-- ── CARD 1 ── -->
+        <div class="portfolio-card reveal" data-category="ecommerce">
+          <div class="card-thumb ct-1">
+            <div class="card-overlay">
+              <!-- Troque href="#" pelo link real do projeto -->
+              <a href="https://dominiquepersonalizados.vercel.app" class="card-link-btn" target="_blank" rel="noopener">Ver projeto</a>
+            </div>
+            <!-- Troque o src pela screenshot do projeto (ex: ./assets/dominique.jpg) -->
+            <!-- Se não tiver imagem, apague a linha abaixo e descomente o card-mock -->
+            <img class="card-project-img" src="./assets/SITE DOMINIQUE PERSONALIZADOS.png" alt="Dominique Personalizados" />
+            <!-- <div class="card-mock"><div class="cm-header"></div><div class="cm-body"><div class="cm-block b1"></div><div class="cm-block b2"></div></div></div> -->
+          </div>
+          <div class="card-info">
+            <span class="card-tag">ecommerce</span>
+            <h3 class="card-title">Dominique Personalizados</h3>
+            <p class="card-desc">ecommerce focada em vendas de brindes e presentes personalizados.</p>
+            <div class="card-techs">
+              <span>HTML</span><span>CSS</span><span>JS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CARD 2 ── -->
+        <div class="portfolio-card reveal delay-1" data-category="institucional">
+          <div class="card-thumb ct-2">
+            <div class="card-overlay">
+              <a href="https://antonioluiz-dev.github.io/PROJETO-BARBEARIA/" class="card-link-btn" target="_blank" rel="noopener">Ver projeto</a>
+            </div>
+            <img class="card-project-img" src="./assets/SITE RA BARBEARIA.png" alt="RA Barbearia" />
+            <!-- <div class="card-mock"><div class="cm-header"></div><div class="cm-body"><div class="cm-block b1"></div><div class="cm-block b2"></div></div></div> -->
+          </div>
+          <div class="card-info">
+            <span class="card-tag">Site Institucional</span>
+            <h3 class="card-title">RA Barbearia</h3>
+            <p class="card-desc">Site para barbearia com galeria de trabalhos, preços e agendamento via WhatsApp.</p>
+            <div class="card-techs">
+              <span>HTML</span><span>CSS</span><span>JS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CARD 3 ── -->
+        <div class="portfolio-card reveal delay-2" data-category="institucional">
+          <div class="card-thumb ct-3">
+            <div class="card-overlay">
+              <a href="https://antonioluiz-dev.github.io/PROJETO-PADARIA-DIVINO-PAO/" class="card-link-btn" target="_blank" rel="noopener">Ver projeto</a>
+            </div>
+            <img class="card-project-img" src="./assets/SITE PADARIA DIVINO PAO.png" alt="Padaria Divino Pão" />
+            <!-- <div class="card-mock"><div class="cm-header"></div><div class="cm-body"><div class="cm-block b1"></div><div class="cm-block b2"></div></div></div> -->
+          </div>
+          <div class="card-info">
+            <span class="card-tag">Site Institucional</span>
+            <h3 class="card-title">Padaria Divino Pão</h3>
+            <p class="card-desc">Site com cardápio digital, localização e contato para padaria.
+            </p>
+            <div class="card-techs">
+              <span>HTML</span><span>CSS</span><span>JS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CARD 4 ── -->
+        <div class="portfolio-card reveal delay-1" data-category="institucional">
+          <div class="card-thumb ct-4">
+            <div class="card-overlay">
+              <a href="#" class="card-link-btn" target="_blank" rel="noopener">Ver projeto</a>
+            </div>
+            <img class="card-project-img" src="" alt="CEVIM" />
+            <!-- <div class="card-mock"><div class="cm-header"></div><div class="cm-body"><div class="cm-block b1"></div><div class="cm-block b2"></div></div></div> -->
+          </div>
+          <div class="card-info">
+            <span class="card-tag">Site Institucional</span>
+            <h3 class="card-title">CEVIM</h3>
+            <p class="card-desc">Demo de site para escola com apresentação institucional, diferenciais e captação de
+              matrículas.</p>
+            <div class="card-techs">
+              <span>HTML</span><span>CSS</span><span>JS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TEMPLATE PARA NOVO CARD (copie e cole aqui, ajuste os dados) ──
+        <div class="portfolio-card reveal" data-category="institucional">
+          <div class="card-thumb ct-5">
+            <div class="card-overlay">
+              <a href="https://URL-DO-PROJETO.com.br" class="card-link-btn" target="_blank" rel="noopener">Ver projeto</a>
+            </div>
+            <img class="card-project-img" src="./assets/nome-do-projeto.jpg" alt="Nome do Projeto" />
+          </div>
+          <div class="card-info">
+            <span class="card-tag">Site Institucional</span>
+            <h3 class="card-title">Nome do Projeto</h3>
+            <p class="card-desc">Descrição breve do projeto e o que foi feito.</p>
+            <div class="card-techs">
+              <span>HTML</span><span>CSS</span><span>JS</span>
+            </div>
+          </div>
+        </div>
+        ── -->
+
       </div>
     </div>
   </section>
 
-  <!-- SERVIÇOS -->
+  <!-- ============================================================
+       SERVIÇOS
+  ============================================================ -->
   <section class="servicos" id="servicos">
     <div class="hero-glow sg-glow" aria-hidden="true"></div>
     <div class="container">
@@ -246,7 +381,9 @@
     </div>
   </section>
 
-  <!-- PREÇOS -->
+  <!-- ============================================================
+       PREÇOS
+  ============================================================ -->
   <section class="precos" id="precos">
     <div class="container">
       <div class="section-header reveal">
@@ -255,11 +392,11 @@
         <p class="section-sub">Preços diretos. Sem taxas escondidas.</p>
       </div>
       <div class="precos-grid">
+
         <div class="preco-card reveal">
           <div class="preco-header">
             <span class="preco-plano">Starter</span>
-            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num"
-                id="price-starter">1.197</span></div>
+            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num">1.197</span></div>
             <span class="preco-desc">Landing Page</span>
           </div>
           <ul class="preco-list">
@@ -273,12 +410,12 @@
           </ul>
           <a href="#contato" class="btn-outline preco-cta">Quero este plano</a>
         </div>
+
         <div class="preco-card pc-featured reveal delay-1">
           <div class="pc-popular">Recomendado</div>
           <div class="preco-header">
             <span class="preco-plano">Profissional</span>
-            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num"
-                id="price-pro">1.597</span></div>
+            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num">1.597</span></div>
             <span class="preco-desc">Site Institucional</span>
           </div>
           <ul class="preco-list">
@@ -293,11 +430,11 @@
           </ul>
           <a href="#contato" class="btn-primary preco-cta">Quero este plano</a>
         </div>
+
         <div class="preco-card reveal delay-2">
           <div class="preco-header">
             <span class="preco-plano">Business</span>
-            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num"
-                id="price-business">1.997</span></div>
+            <div class="preco-valor"><span class="preco-moeda">R$</span><span class="preco-num">1.997</span></div>
             <span class="preco-desc">WordPress Completo</span>
           </div>
           <ul class="preco-list">
@@ -312,47 +449,112 @@
           </ul>
           <a href="#contato" class="btn-outline preco-cta">Quero este plano</a>
         </div>
+
       </div>
       <p class="precos-nota reveal">Precisa de algo diferente? Me conta o projeto e faço um orçamento personalizado.</p>
     </div>
   </section>
 
-  <!-- DEPOIMENTOS -->
+  <!-- ============================================================
+       DEPOIMENTOS
+       ──────────────────────────────────────────────────────────
+       Com menos de 4 cards → grade normal.
+       Com 4 ou mais → carrossel infinito automático.
+
+       COMO ADICIONAR DEPOIMENTO:
+       Copie um bloco <div class="dep-card"> e cole dentro de
+       <div id="dep-cards-source">.
+  ============================================================ -->
   <section class="depoimentos" id="depoimentos">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">Clientes</span>
         <h2 class="section-title">Quem já trabalhou comigo</h2>
       </div>
+
+      <!-- fonte dos cards — o JS lê daqui e monta grade ou carrossel -->
+      <div id="dep-cards-source" style="display:none">
+
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"O site ficou exatamente como eu imaginava. Antonio entendeu meu negócio e entregou antes
+            do prazo. Meus clientes adoraram."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">D</div>
+            <div><strong>Dominique</strong><span>Dominique Personalizados</span></div>
+          </div>
+        </div>
+
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"Profissional, direto ao ponto e comunicação excelente. O site trouxe novos clientes para
+            a barbearia logo na primeira semana."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">F</div>
+            <div><strong>Favela</strong><span>Favela's Barber Shop</span></div>
+          </div>
+        </div>
+
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"Não entendia nada de site e ele foi paciente em tudo. Ficou lindo, aparece no Google e os
+            clientes conseguem me encontrar agora."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">E</div>
+            <div><strong>Eugênia</strong><span>Padaria Dona Eugênia</span></div>
+          </div>
+        </div>
+
+        <!-- TEMPLATE: copie o bloco abaixo para adicionar mais depoimentos
+        <div class="dep-card">
+          <div class="dep-stars">★★★★★</div>
+          <p class="dep-text">"Depoimento do cliente aqui."</p>
+          <div class="dep-author">
+            <div class="dep-avatar">X</div>
+            <div><strong>Nome</strong><span>Empresa</span></div>
+          </div>
+        </div>
+        -->
+
+      </div>
+
+      <!-- o JS injeta aqui -->
       <div id="dep-container" aria-live="polite"></div>
+
     </div>
   </section>
 
-  <!-- CONTATO -->
+  <!-- ============================================================
+       CONTATO
+  ============================================================ -->
   <section class="contato" id="contato">
     <div class="hero-glow ct-glow" aria-hidden="true"></div>
     <div class="container">
       <div class="contato-inner">
+
         <div class="contato-info reveal">
           <span class="section-label">Contato</span>
           <h2 class="section-title">Vamos construir<br />seu site juntos</h2>
           <p class="contato-desc">Me conta sobre seu negócio e o que você precisa. Respondo em até 24 horas.</p>
           <div class="contato-links">
-            <a id="whatsapp-link" href="https://wa.me/5521994882394?text=Ol%C3%A1%20Antonio!"
+            <!-- Troque o número no href e no span pelo seu WhatsApp real -->
+            <a href="https://wa.me/5521994882394?text=Ol%C3%A1%20Antonio!%20Quero%20um%20or%C3%A7amento."
               class="contact-item whatsapp-link" target="_blank" rel="noopener">
               <span class="ci-icon" aria-hidden="true">💬</span>
-              <div><strong>WhatsApp</strong><span id="contact-phone">(21) 99488-2394</span></div>
+              <div><strong>WhatsApp</strong><span>(21) 99488-2394</span></div>
             </a>
-            <a id="email-link" href="mailto:antonioluiz.dev@outlook.com" class="contact-item">
+            <!-- Troque o e-mail abaixo pelo seu -->
+            <a href="mailto:antonioluiz.dev@outlook.com" class="contact-item">
               <span class="ci-icon" aria-hidden="true">✉️</span>
-              <div><strong>E-mail</strong><span id="contact-email">antonioluiz.dev@outlook.com</span></div>
+              <div><strong>E-mail</strong><span>antonioluiz.dev@outlook.com</span></div>
             </a>
             <div class="contact-item">
               <span class="ci-icon" aria-hidden="true">📍</span>
-              <div><strong>Localização</strong><span id="contact-location">Fragoso - Magé, RJ</span></div>
+              <div><strong>Localização</strong><span>Fragoso - Magé, RJ</span></div>
             </div>
           </div>
         </div>
+
         <div class="contato-form-wrap reveal delay-1">
           <form class="contato-form" id="contatoForm" novalidate>
             <div class="form-group">
@@ -383,19 +585,21 @@
             <div class="form-success" id="formSuccess" role="alert">✓ Mensagem enviada! Te retorno em até 24h.</div>
           </form>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
-        <!-- FOOTER LOGO: só a imagem, link oculto para o admin -->
-        <a href="admin.html" class="footer-logo-link" title="" aria-label="Painel administrativo">
-          <img id="site-logo-footer" src="./assets/AL Desenvolvmento Web (contrato).png" alt="AL Desenvolvimento Web"
+        <div class="footer-brand">
+          <img src="./assets/AL Desenvolvmento Web (contrato).png" alt="AL Desenvolvimento Web"
             class="logo-img logo-img-footer" />
-        </a>
+        </div>
         <p class="footer-copy">© 2026 AL Desenvolvimento Web. Todos os direitos reservados.<br>Fragoso - Magé, RJ.</p>
         <div class="footer-links">
           <a href="#sobre">Sobre</a>
@@ -407,12 +611,6 @@
     </div>
   </footer>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
-  <script src="firebase-config.js"></script>
   <script src="script.js"></script>
 </body>
 
